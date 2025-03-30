@@ -1,0 +1,22 @@
+---
+# tasks file for nginx
+
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+
+# Copy index file
+- name: Copy index file
+  copy:
+    src: /home/ubuntu/nginx/files/index.html
+    dest: /var/www/html/index.nginx-debian.html
+
+# Start and enable Nginx
+- name: Start and enable Nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+  notify: Restart nginx
+
